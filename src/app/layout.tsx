@@ -7,6 +7,7 @@ import { getMovieGenres } from '@/features/movies/data';
 import { TmdbConfigurationProvider } from '@/features/tmdb/components/tmdb-configuration-context';
 import { getTmdbConfiguration } from '@/features/tmdb/data';
 import type { Viewport } from 'next';
+import { Suspense } from 'react';
 
 // TODO: Improve metadata of pages
 // TODO: Check 'use client' usages
@@ -31,6 +32,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
+        <Suspense>
         <ThemeRegistry options={{ key: 'mui' }}>
           <BaseGlobalStyles />
           <BaseSWRConfig>
@@ -39,6 +41,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             </TmdbConfigurationProvider>
           </BaseSWRConfig>
         </ThemeRegistry>
+        </Suspense>
       </body>
     </html>
   );
