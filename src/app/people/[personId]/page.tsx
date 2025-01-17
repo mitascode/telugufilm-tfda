@@ -13,7 +13,7 @@ import {
   PersonImagesSkeleton,
 } from '@/features/people/components/person-images';
 import { PersonSummary } from '@/features/people/components/person-summary';
-import { getPerson } from '@/features/people/data';
+// import { getPerson } from '@/features/people/data';
 import { getTmdbConfiguration } from '@/features/tmdb/data';
 import { getTmdbImageUrl } from '@/features/tmdb/utils';
 import { Container, Divider, Stack } from '@mui/material';
@@ -22,14 +22,19 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 async function getPageData(personId: string) {
-  const [tmdbConfiguration, person] = await Promise.all([
+  // const [tmdbConfiguration, person] = await Promise.all([
+  //   getTmdbConfiguration(),
+  //   getPerson(Number(personId)),
+  // ]);
+
+  const [tmdbConfiguration] = await Promise.all([
     getTmdbConfiguration(),
-    getPerson(Number(personId)),
+   
   ]);
 
-  if (!person) notFound();
+  // if (!person) notFound();
 
-  return { tmdbConfiguration, person };
+  return { tmdbConfiguration };
 }
 
 type PersonPageProps = {
@@ -42,19 +47,19 @@ export async function generateMetadata(
   props: PersonPageProps,
 ): Promise<Metadata> {
   const { personId } = await props.params;
-  const { tmdbConfiguration, person } = await getPageData(personId);
+  const { tmdbConfiguration } = await getPageData(personId);
 
   return getMetadata({
-    title: person.name,
-    description: person.biography,
+    title: '',
+    description:'',
     pathname: `/people/${personId}`,
     images: [
       {
         url: getTmdbImageUrl({
           tmdbConfiguration,
-          imagePath: person.profile_path,
+          imagePath: '',
         }),
-        alt: person.name,
+        alt: '',
       },
     ],
   });
@@ -62,7 +67,7 @@ export async function generateMetadata(
 
 export default async function PersonPage(props: PersonPageProps) {
   const { personId } = await props.params;
-  const { person } = await getPageData(personId);
+  // const { person } = await getPageData(personId);
 
   return (
     <AppHeaderOffset>
@@ -70,7 +75,7 @@ export default async function PersonPage(props: PersonPageProps) {
         <Stack spacing={6}>
           <Stack spacing={2}>
             <Container>
-              <PersonSummary person={person} />
+              {/* <PersonSummary person={{id : 0, name :'',  profile_path : '', place_of_birth : '', official_site : '', also_known_as : [''], imdb_id : '', adult : true, popularity : 232, known_for_department : ''}} /> */}
             </Container>
 
             <Divider />

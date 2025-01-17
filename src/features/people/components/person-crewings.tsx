@@ -7,7 +7,7 @@ import {
   MovieCard,
   MovieCardSkeleton,
 } from '@/features/movies/components/movie-card';
-import { getPersonCredits } from '@/features/people/data';
+// import { getPersonCredits } from '@/features/people/data';
 
 type PersonCrewingsShellProps = {
   children: React.ReactNode;
@@ -29,20 +29,20 @@ type PersonCrewingsProps = {
 };
 
 export async function PersonCrewings({ personId }: PersonCrewingsProps) {
-  const { crew } = await getPersonCredits(personId);
+  // const { crew } = await getPersonCredits(personId);
 
-  return (
-    <PersonCrewingsShell>
-      <GridList listEmptyMessage="No crew info has been found.">
-        {crew.map((crewing) => {
-          return (
-            <li key={crewing.id}>
-              <MovieCard movie={crewing} subheader={crewing.job} />
-            </li>
-          );
-        })}
-      </GridList>
-    </PersonCrewingsShell>
+  return (<></>
+    // <PersonCrewingsShell>
+    //   <GridList listEmptyMessage="No crew info has been found.">
+    //     {crew.map((crewing) => {
+    //       return (
+    //         <li key={crewing.id}>
+    //           <MovieCard movie={crewing} subheader={crewing.job} />
+    //         </li>
+    //       );
+    //     })}
+    //   </GridList>
+    // </PersonCrewingsShell>
   );
 }
 
