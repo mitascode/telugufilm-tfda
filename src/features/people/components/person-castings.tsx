@@ -7,7 +7,7 @@ import {
   MovieCard,
   MovieCardSkeleton,
 } from '@/features/movies/components/movie-card';
-// import { getPersonCredits } from '@/features/people/data';
+import { getPersonCredits } from '@/features/people/data';
 
 type PersonCastingsShellProps = {
   children: React.ReactNode;
@@ -29,20 +29,20 @@ type PersonCastingsProps = {
 };
 
 export async function PersonCastings({ personId }: PersonCastingsProps) {
-  // const { cast } = await getPersonCredits(personId);
+  const { cast } = await getPersonCredits(personId);
 
-  return (<></>
-    // <PersonCastingsShell>
-    //   <GridList listEmptyMessage="No casting has been found.">
-    //     {cast.map((casting) => {
-    //       return (
-    //         <li key={casting.id}>
-    //           <MovieCard movie={casting} subheader={casting.character} />
-    //         </li>
-    //       );
-    //     })}
-    //   </GridList>
-    // </PersonCastingsShell>
+  return (
+    <PersonCastingsShell>
+      <GridList listEmptyMessage="No casting has been found.">
+        {cast.map((casting) => {
+          return (
+            <li key={casting.id}>
+              <MovieCard movie={casting} subheader={casting.character} />
+            </li>
+          );
+        })}
+      </GridList>
+    </PersonCastingsShell>
   );
 }
 

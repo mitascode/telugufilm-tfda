@@ -11,7 +11,7 @@ import {
   ImageCard,
   ImageCardSkeleton,
 } from '@/features/media/components/image-card';
-// import { getPersonImages } from '@/features/people/data';
+import { getPersonImages } from '@/features/people/data';
 
 type PersonImagesShellProps = {
   seeAllLink: React.ReactNode;
@@ -36,33 +36,33 @@ type PersonImagesProps = {
 };
 
 export async function PersonImages({ personId }: PersonImagesProps) {
-  // const images = await getPersonImages(personId);
+  const images = await getPersonImages(personId);
 
-  // if (!images.length) return null;
+  if (!images.length) return null;
 
-  // const [firstImage] = images;
+  const [firstImage] = images;
 
-  return ( <></>
-    // <PersonImagesShell
-    //   seeAllLink={
-    //     <SeeAllLink
-    //       href={`/people/${personId}/images/${firstImage.file_path}`}
-    //     />
-    //   }
-    // >
-    //   {images.slice(0, 8).map((image, i) => {
-    //     return (
-    //       <li key={image.file_path}>
-    //         <ImageCard
-    //           href={`/people/${personId}/images${image.file_path}`}
-    //           imageSrc={image.file_path}
-    //           alt={`Image - ${i + 1}`}
-    //           aspectRatio="2 / 3"
-    //         />
-    //       </li>
-    //     );
-    //   })}
-    // </PersonImagesShell>
+  return (
+    <PersonImagesShell
+      seeAllLink={
+        <SeeAllLink
+          href={`/people/${personId}/images/${firstImage.file_path}`}
+        />
+      }
+    >
+      {images.slice(0, 8).map((image, i) => {
+        return (
+          <li key={image.file_path}>
+            <ImageCard
+              href={`/people/${personId}/images${image.file_path}`}
+              imageSrc={image.file_path}
+              alt={`Image - ${i + 1}`}
+              aspectRatio="2 / 3"
+            />
+          </li>
+        );
+      })}
+    </PersonImagesShell>
   );
 }
 
